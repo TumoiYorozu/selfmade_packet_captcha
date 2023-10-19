@@ -13,12 +13,12 @@ int main() {
         return -1;
     }
 
-    char buffer[4096];
-    memset(buffer, 0, sizeof(buffer));
+    char data[4096];
+    memset(data, 0, sizeof(data));
 
     // 全てのタイプのパケットの受信
     while (true) {
-        ssize_t data_size = recv(sockfd, buffer, sizeof(buffer), 0);
+        ssize_t data_size = recv(sockfd, data, sizeof(data), 0);
         if (data_size < 0) {
             printf("Failed to get packets\n");
             return -1;
@@ -28,13 +28,13 @@ int main() {
         printf("Received packet size: %zd\n", data_size);
 
         // Ethernetタイプを表示
-        int eth_type = buffer[12] * 256u + (unsigned char)buffer[13];
+        int eth_type = data[12] * 256u + (unsigned char)data[13];
         printf("Ethernet Type: 0x%04x\n", eth_type);
 
         // 先頭の100バイトを16進数形式で表示
         for (int i = 0; i < data_size; i++) {
             if (i >= 100) break;
-            printf("%02x ", (unsigned char)buffer[i]);
+            printf("%02x ", (unsigned char)data[i]);
         }
         printf("\n\n");
 
