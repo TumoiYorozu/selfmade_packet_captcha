@@ -8,7 +8,7 @@ def parse_ip(ip):
     return '.'.join(str(x) for x in ip)
 
 def packet_callback(packet):
-    # パケットをバイト形式に変換し、先頭の100バイトを取得
+    # パケットをバイト形式に変換し、先頭の2000バイトを取得
     data = bytes(packet)[:2000]
 
     # 位置[12:14]にあるEthernetタイプを取得
